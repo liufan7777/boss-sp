@@ -6,12 +6,12 @@ from venv.common.boss.send_message_api import send_message
 from venv.utils.log_utils import logger
 
 
-def send_massage(cookie, jobid):
+def send_massage(cookie, jobid,page):
     joblist=job_list(cookie)
     joblistid=joblist["zpData"]["onlineJobList"][jobid]["encryptId"]
     logger.info("获取到的jobid为" + str(joblistid))
-
-    geeklist=geek_list(cookie,joblistid)
+    page=page+1
+    geeklist=geek_list(cookie,joblistid,page)
     # logger.info("获取到的候选人列表"+str(geeklist))
 
     geekinfomation = geeklist["zpData"]["geekList"]
@@ -23,9 +23,10 @@ def send_massage(cookie, jobid):
         encryptGeekId = list(set(jsonpath(content, "$..responsibility")))
         if ("银行" or "信贷") in str(encryptGeekId):
             gid=geekinfomation[i]["encryptGeekId"]
+            securityId=geekinfomation[i]["geekCard"]["securityId"]
             expectId=geekinfomation[i]["geekCard"]["expectId"]
             lid = geekinfomation[i]["geekCard"]["lid"]
-            gooki.append([gid,expectId,lid])
+            gooki.append([gid,expectId,lid,securityId])
             print(gooki)
 
         # else:
@@ -37,13 +38,14 @@ def send_massage(cookie, jobid):
         gid=gooki[i][0]
         expid=gooki[i][1]
         lib=gooki[i][2]
+        securityId=gooki[i][3]
         jid = joblistid
-        msg=send_message(cookie=cookie,gid=gid,jid=jid,expid=expid,lib=lib)
+        msg=send_message(cookie=cookie,gid=gid,jid=jid,expid=expid,lib=lib,securityId=securityId)
         print(msg.json())
 
 
 
 
 
-if __name__ == '__main__':
-    send_massage("lastCity=101020100; _bl_uid=F1k6hsn10dhgk3g4Czd1asFvRC0n; wd_guid=efb658c5-6d96-45b7-bf87-a987a992977a; historyState=state; Hm_lvt_194df3105ad7148dcf2b98a91b5e727a=1637840440; __zp_stoken__=53d1dGm93URwwRD8fLCxWGmhxL2Y9KWhsc0hXSCUOGl16ex0VLV5JBEsuJxItG3JdHnYHVTc1GAwgH2w8MxB8X29nAzY4cCR4cmQTcwE1FBwzEVlNN0VwFSNBaCExFisMXE81fS1OZwVtBT4%3D; acw_tc=0bdd34ce16379276253642965e019e560ed542bb9251cdcba700d1efb3c9ee; __zp_seo_uuid__=08d2e932-4058-4e57-8de5-0dc7f6e4b544; __g=-; wt2=Dfl7NiQTXuoa_gD8TBWe7w9ZUkZ-SR1U2a4oQyNMFNACU0a6hj9rWO8puaY7GmK_d2JYleEnlDhluyMPymrNlsQ~~; zp_token=V1Q9MlE-X12VlgXdNqyBQaISq47TvXxg%7E%7E; __l=r=https%3A%2F%2Fwww.baidu.com%2Flink%3Furl%3DCvNSqSRzp3NpgeRbXOBX7H2H3LbTIB03m72mayQ3Inq26dxP3WadR-6r6u6zdR5Y%26wd%3D%26eqid%3De92ad60700004da70000000461a0cac6&l=%2Fwww.zhipin.com%2Fweb%2Fboss%2Findex&s=3&g=&friend_source=0&s=3&friend_source=0; __f=af5b2b0fa430f0701a2910ddf7c7cc5e; __c=1637927627; __a=28596633.1628260836.1637840440.1637927627.65.6.5.12",1)
+# if __name__ == '__main__':
+#     send_massage("_bl_uid=mpk02qjakXbv8q64gkzh28nsUaas; lastCity=101020100; wd_guid=c6cd0aaf-c31e-4a29-a29e-617437ef88c2; historyState=state; wt2=Du2Hp5txFNwHtt7WisSruodeJs1RwxJufziezV2ZJe8z8Bmsx4grFxMqx6yISnZ71Rfw_XwfnWaJcnmum-3hD7A~~; Hm_lvt_194df3105ad7148dcf2b98a91b5e727a=1637633069,1637890923,1638150748,1638236825; __f=f90fbd19e7124d136246dd0ca2e4f888; __g=-; __l=l=%2Fwww.zhipin.com%2Fweb%2Fboss%2Findex&r=&g=&s=3&friend_source=0; __c=1638755484; __a=28283146.1625141292.1638704903.1638755484.2239.126.9.2239; acw_tc=0bdd34b216387590858468932e019e2792ed3995800fe0245ef7e3a3b4430d; zp_token=V1Q9MlE-X12VlgXdNqxxodIC2y6TLQxg%7E%7E",2)
