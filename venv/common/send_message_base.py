@@ -34,7 +34,7 @@ def send_massage(cookie, jobid,page):
         # else:
         #     ad = geekinfomation[i]["encryptGeekId"]
         #     logger.info("当前候选人不符合" +ad)
-    if geeknamelist == None:
+    if geeknamelist == []:
         logger.info("筛选第"+str(page)+"页候选人无符合")
     else:
         logger.info("筛选出第"+str(page)+"页符合的候选人"+str(geeknamelist))
@@ -48,11 +48,15 @@ def send_massage(cookie, jobid,page):
         jid = joblistid
         logger.info("正在给"+str(geekName)+"打招呼")
         msg=send_message(cookie=cookie,gid=gid,jid=jid,expid=expid,lib=lib,securityId=securityId)
-        print(msg.json())
+        msg=msg.json()
+        if msg["message"]=="Success":
+            logger.info(str(geekName)+"发送成功")
+        else:
+            logger.info(str(geekName)+"发送失败")
 
 
 
 
 
 if __name__ == '__main__':
-    send_massage("_bl_uid=mpk02qjakXbv8q64gkzh28nsUaas; lastCity=101020100; wd_guid=c6cd0aaf-c31e-4a29-a29e-617437ef88c2; historyState=state; wt2=Du2Hp5txFNwHtt7WisSruodeJs1RwxJufziezV2ZJe8z8Bmsx4grFxMqx6yISnZ71Rfw_XwfnWaJcnmum-3hD7A~~; Hm_lvt_194df3105ad7148dcf2b98a91b5e727a=1637633069,1637890923,1638150748,1638236825; __f=f90fbd19e7124d136246dd0ca2e4f888; __g=-; __l=l=%2Fwww.zhipin.com%2Fweb%2Fboss%2Findex&r=&g=&s=3&friend_source=0; __c=1638755484; __a=28283146.1625141292.1638704903.1638755484.2239.126.9.2239; acw_tc=0bdd34b216387590858468932e019e2792ed3995800fe0245ef7e3a3b4430d; zp_token=V1Q9MlE-X12VlgXdNqxxodIC2y6TLQxg%7E%7E",2,1)
+    send_massage("_bl_uid=mpk02qjakXbv8q64gkzh28nsUaas; lastCity=101020100; wd_guid=c6cd0aaf-c31e-4a29-a29e-617437ef88c2; historyState=state; wt2=Du2Hp5txFNwHtt7WisSruodeJs1RwxJufziezV2ZJe8z8Bmsx4grFxMqx6yISnZ71Rfw_XwfnWaJcnmum-3hD7A~~; Hm_lvt_194df3105ad7148dcf2b98a91b5e727a=1637633069,1637890923,1638150748,1638236825; __f=f90fbd19e7124d136246dd0ca2e4f888; __g=-; __l=l=%2Fwww.zhipin.com%2Fweb%2Fboss%2Findex&r=&g=&s=3&friend_source=0; __c=1638755484; __a=28283146.1625141292.1638704903.1638755484.2239.126.9.2239; acw_tc=0bdd34b216387590858468932e019e2792ed3995800fe0245ef7e3a3b4430d; zp_token=V1Q9MlE-X12VlgXdNqxxodIC2y6TLQxg%7E%7E",2,15)
