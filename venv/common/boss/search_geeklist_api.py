@@ -30,7 +30,7 @@ def geek_list(cookie ,jobId ,page):
     #     "_":"1637978965266"
     # }
     data={
-        "age": "16,-1",
+        "age": "22,35",
         "gender":0,
         "exchangeResumeWithColleague":0 ,
         "switchJobFrequency":0,
@@ -39,7 +39,7 @@ def geek_list(cookie ,jobId ,page):
         "school":0,
         "major": 0,
         "experience":0,
-        "degree":0,
+        "degree":203,
         "salary":0,
         "intention":0,
         "jobId":jobId,
