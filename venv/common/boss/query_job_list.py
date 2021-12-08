@@ -17,7 +17,7 @@ def job_list(cookie):
         logger.info("cookie已失效，请更换")
         quit()
     else:
-        return  res
+        return res
 
 # if __name__ == '__main__':
 #     job_list()

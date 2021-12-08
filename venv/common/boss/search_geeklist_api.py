@@ -1,7 +1,8 @@
 from venv.utils.request_utils import HttpRequests
 
+
 # 获取到招聘岗位列表
-def geek_list(cookie ,jobId ,page):
+def geek_list(cookie, jobId, page):
     url = "https://www.zhipin.com/wapi/zpjob/rec/geek/list"
     # headers = {
     #     "Host": "www.zhipin.com",
@@ -29,25 +30,25 @@ def geek_list(cookie ,jobId ,page):
     #     "page":1,
     #     "_":"1637978965266"
     # }
-    data={
+    data = {
         "age": "22,35",
-        "gender":0,
-        "exchangeResumeWithColleague":0 ,
-        "switchJobFrequency":0,
-        "activation":0,
-        "recentNotView":0,
-        "school":0,
+        "gender": 0,
+        "exchangeResumeWithColleague": 0,
+        "switchJobFrequency": 0,
+        "activation": 0,
+        "recentNotView": 0,
+        "school": 0,
         "major": 0,
-        "experience":0,
-        "degree":203,
-        "salary":0,
-        "intention":0,
-        "jobId":jobId,
-        "page":page,
+        "experience": 0,
+        "degree": 203,
+        "salary": 0,
+        "intention": 0,
+        "jobId": jobId,
+        "page": page,
 
     }
     res = HttpRequests("get", url=url, headers=headers, data=data).request()
-    res=res.json()
+    res = res.json()
     return res
 
 # if __name__ == '__main__':
