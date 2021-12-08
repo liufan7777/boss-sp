@@ -1,3 +1,4 @@
+from venv.utils.log_utils import logger
 from venv.utils.request_utils import HttpRequests
 
 # 获取已发布岗位列表
@@ -11,7 +12,12 @@ def job_list(cookie):
     }
 
     res=HttpRequests("get" ,url=url, headers=headers).request()
-    return  res.json()
+    res=res.json()
+    if res["message"]=="当前登录状态已失效":
+        logger.info("cookie已失效，请更换")
+        quit()
+    else:
+        return  res
 
 # if __name__ == '__main__':
 #     job_list()
