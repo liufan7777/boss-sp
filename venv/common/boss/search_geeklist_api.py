@@ -35,7 +35,7 @@ def geek_list(cookie, jobId, page):
         "gender": 0,
         "exchangeResumeWithColleague": 0,
         "switchJobFrequency": 0,
-        "activation": 0,
+        "activation": 2503,
         "recentNotView": 0,
         "school": 0,
         "major": 0,
